@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { ImTicket } from 'react-icons/im'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { addReserve } from '../../store/modules/reserve/actions,';
 
 import api from '../../services/api';
 import './home.css';
@@ -21,10 +22,7 @@ export default function Home() {
  }, []);
 
  function handleAdd(trip){
-  dispatch({
-    type: 'ADD_RESERVE',
-    trip
-  })
+  dispatch(addReserve(trip));
  }
 
  return (
