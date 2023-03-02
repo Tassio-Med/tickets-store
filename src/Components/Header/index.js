@@ -8,7 +8,7 @@ export default function index() {
   return (
     <header className='container'>
       <Link to='/'>
-        <MdAirplaneTicket className='logo'/>
+        <MdAirplaneTicket className='logo' size={60}/>
       </Link>
 
       <Link className='reserva' to='/reservas'>
