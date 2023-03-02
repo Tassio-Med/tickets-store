@@ -1,11 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import { ImTicket } from 'react-icons/im'
+import { useDispatch } from 'react-redux'
 
 import api from '../../services/api';
 import './home.css';
 
 export default function Home() {
- const [trips, setTrips] = useState([]);
+  const dispatch = useDispatch();
+  const [trips, setTrips] = useState([]);
 
  useEffect(()=>{
 
@@ -18,6 +20,13 @@ export default function Home() {
 
  }, []);
 
+ function handleAdd(trip){
+  dispatch({
+    type: 'ADD_RESERVE',
+    trip
+  })
+ }
+
  return (
    <div>
      <div className="box">
@@ -29,7 +38,7 @@ export default function Home() {
 
            <button
            type="button"
-           onClick={()=> {}}
+           onClick={() => handleAdd(trip) }
            >  
              <div>
                <ImTicket size={16} color="#FFF" />

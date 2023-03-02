@@ -3,8 +3,11 @@ import './header.css';
 
 import { Link } from 'react-router-dom';
 import { MdAirplaneTicket } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
-export default function index() {
+export default function Header() {
+  const reserveSize = useSelector(state => state.reserve.length);
+
   return (
     <header className='container'>
       <Link to='/'>
@@ -14,7 +17,7 @@ export default function index() {
       <Link className='reserva' to='/reservas'>
         <div>
           <strong>Minhas reservas</strong>
-          <span>7 reservas</span>
+          <span>{reserveSize} reservas</span>
         </div>
       </Link>
     </header>
