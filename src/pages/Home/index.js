@@ -1,24 +1,44 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react';
+import { ImTicket } from 'react-icons/im'
+
 import api from '../../services/api';
+import './home.css';
 
 export default function Home() {
-  const[trips, setTrips] = useState([]);
+ const [trips, setTrips] = useState([]);
 
-  useEffect(() => {
-    async function loadApi(){
-      const response = await api.get('trips');
-      setTrips(response.data);
+ useEffect(()=>{
 
-      console.log(response.data);
-    }
+  async function loadApi(){
+    const response = await api.get('trips');
+    setTrips(response.data);
+  }
 
-    loadApi();
-    
-  }, [])
-  
-  return (
-    <div>
-      <h1>HOME</h1>
-    </div>
-  )
+  loadApi();
+
+ }, []);
+
+ return (
+   <div>
+     <div className="box">
+       {trips.map(trip => (
+         <li key={trip.id}>
+           <img src={trip.image} alt={trip.title} />
+           <strong>{trip.title}</strong>
+           <span>Status: {trip.status ? 'Disponivel' : 'Indisponivel'}</span>
+
+           <button
+           type="button"
+           onClick={()=> {}}
+           >  
+             <div>
+               <ImTicket size={16} color="#FFF" />
+             </div>
+             <span>SOLICITAR RESERVA</span> 
+           </button>
+         </li>
+       ))}
+     </div>
+   </div>
+ );
 }
