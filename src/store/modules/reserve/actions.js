@@ -1,6 +1,13 @@
-export function addReserve(trip){
+export function addReserveRequest(id){
   return {
-    type: 'ADD_RESERVE',
+    type: 'ADD_RESERVE_REQUEST',
+    id
+  }
+}
+
+export function addReserveSuccess(trip){
+  return {
+    type: 'ADD_RESERVE_SUCCESS',
     trip
   }
 }
