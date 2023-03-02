@@ -1,26 +1,31 @@
 import React from 'react'
 import './reservas.css';
 
+import { useSelector } from 'react-redux';
 import {MdDelete} from 'react-icons/md';
 
 export default function Reservas() {
+  const reserves = useSelector( state => state.reserve );
+
   return (
     <div>
-      <h1 className='title'>Você solicitou uma reserva</h1>
+      <h1 className='title'>Você solicitou {reserves.length}</h1>
 
-      <div className='reservas'>
-        <img src="https://sujeitoprogramador.com/wp-content/uploads/2019/12/maceio.jpg"
-        alt="Maceió" 
-        />
-        <strong>Viagem MAceió 7 dias</strong>
-        <span>Quatidade: 2</span>
-        <button
-        type="button"
-        onClick={() => {}}
-        >
-          <MdDelete size={20} color="#191919"/>
-        </button>
-      </div>
+      {reserves.map(reserve => (
+        <div className='reservas' key={reserve.id}>
+          <img src={reserve.image}
+          alt={reserve.title} 
+          />
+          <strong>{reserve.title}</strong>
+          <span>Quantidade: {reserve.amount}</span>
+          <button
+          type="button"
+          onClick={() => {}}
+          >
+            <MdDelete size={20} color="#191919"/>
+          </button>
+        </div>
+      ))}
 
       <footer>
         <button
