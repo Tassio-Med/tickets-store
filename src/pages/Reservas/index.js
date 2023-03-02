@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeReserve, updateAmountReserve } from '../../store/modules/reserve/actions,';
+import { removeReserve, updateAmountReserve } from '../../store/modules/reserve/actions';
 import { MdDelete, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import './reservas.css';
 
