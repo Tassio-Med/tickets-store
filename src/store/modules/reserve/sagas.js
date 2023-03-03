@@ -4,28 +4,28 @@ import api from '../../../services/api';
 
 function* addToReserve({ id }){
   const tripExists = yield select(
-    state => state.reverse.find(trip => trip.id  === id)
+    state => state.reserve.find(trip => trip.id === id)
   );
 
   const myStock = yield call(api.get, `/stock/${id}`);
+
   const stockAmount = myStock.data.amount;
-  const currentStock = tripExists ? tripExists.amount : 0;
+  
+  const currentStock = tripExists ? tripExists.amount : 0; 
+
   const amount = currentStock + 1;
 
   if(amount > stockAmount){
-    alert('Quantidade máxima atingida.');
+    alert('Quantidade maxima atingida.');
     return;
   }
 
-
-  if(tripExists){
-    const amount = tripExists.amount + 1;
+  if(tripExists){ 
 
     yield put(updateAmountSuccess(id, amount));
 
-
   }else{
-    const response = yield call(api.get, `trips/${id}`);
+    const response = yield call(api.get, `trips/${id}` );
 
     const data = {
       ...response.data,
@@ -37,6 +37,7 @@ function* addToReserve({ id }){
 
 }
 
+
 function* updateAmount({ id, amount }){
   if(amount <= 0) return;
 
@@ -45,13 +46,15 @@ function* updateAmount({ id, amount }){
   const stockAmount = myStock.data.amount;
 
   if(amount > stockAmount){
-    alert('Quantidade máxima atingida.');
+    alert('Quantidade maxima atingida.');
+    return;
   }
 
   yield put(updateAmountSuccess(id, amount));
+
 }
 
-export default all ([
+export default all([
   takeLatest('ADD_RESERVE_REQUEST', addToReserve),
   takeLatest('UPDATE_RESERVE_REQUEST', updateAmount),
 ])
